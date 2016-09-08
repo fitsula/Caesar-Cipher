@@ -90,4 +90,4 @@ for characters in text:
 
 print(new['е'])
 
-
+# len(text) * к-сть_цієї_букви_в_тексті / 100
