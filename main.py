@@ -76,21 +76,19 @@ new = {
 text = open('text.txt', encoding='utf8').read()
 print(text)
 
+
+letters = new.keys()
+for element in letters:
+    print(element)
+    i = 0
+    for characters in text:
+        if text[i] == element:
+            new[element] += 1
+        i += 1
+
+
 print('=========================================')
 print('Всіх літер: ' + str(len(text)))
-
-
-# magic
-i = 0
-for characters in text:
-    #print(text[i])
-    #if text[i] == " ":
-    #    print("-")
-    if text[i] == "е":
-        new['е'] += 1
-    #else:
-    #    print("+")
-    i += 1
 
 print('Літер "е": ' + str(new['е']))
 
