@@ -72,23 +72,28 @@ new = {
 }
 
 
-text = input('Введіть текст: ')
-print(len(text))
+#text = input('Введіть текст: ')
+text = open('text.txt', encoding='utf8').read()
+print(text)
+
+print('=========================================')
+print('Всіх літер: ' + str(len(text)))
 
 
 # magic
 i = 0
 for characters in text:
-    print(text[i])
-    if text[i] == " ":
-        print("-")
-    elif text[i] == "е":
+    #print(text[i])
+    #if text[i] == " ":
+    #    print("-")
+    if text[i] == "е":
         new['е'] += 1
-    else:
-        print("+")
+    #else:
+    #    print("+")
     i += 1
 
-print(new['е'])
+print('Літер "е": ' + str(new['е']))
 
 # frequency calculation algorithm
-# len(text) * к-сть_цієї_букви_в_тексті / 100
+coefficient = new['е'] / len(text)
+print('Відсотків "e": ' + str(coefficient))
