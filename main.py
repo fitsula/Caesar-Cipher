@@ -114,5 +114,7 @@ print('Відсотків "e": ' + str(coefficient))
 a = 0
 for elements in new:
     b = alphabet[a]
-    print(new[b])
+    print('old ' + b + ' :' + str(new[b]))
+    new[b] = new[b] / len(text)
+    print('new ' + b + ' :' + str(new[b]))
     a += 1
