@@ -1,7 +1,7 @@
 # ЗАДАЧІ:
-# 1. Відсортувати по велечині масиви original і new
-# 2. Взяти найбільші значення origin і new
-# 3. Порахувати відстань між найбільшим значенням origin і new
+# 1. Взяти найбільші значення origin і new
+# 2. Знайти по найбільшим значенням original і new найбільші букви
+# 3. Порахувати відстань між цими буквами
 # 4. Взяти декілька наступних по величині значень. Переконатись, що відстань однакова.
 # 5. Вивести 2 результати: зміщення на відстань в кожну зі сторін
 # x. Дати зручні і зрозумілі назви всім змінним
@@ -87,12 +87,12 @@ new = {
 # Зчитуємо текст
 #text = input('Введіть текст: ')
 text = open('text.txt', encoding='utf8').read()
-print(text)
+#print(text)
 
 # Рахуємо к-сть літер разом і кожної окремо
 letters = new.keys()
 for element in letters:
-    print(element)
+    #print(element)
     i = 0
     for characters in text:
         if text[i] == element:
@@ -118,12 +118,32 @@ for elements in new:
     print('new ' + b + ' :' + str(new[b]))
     a += 1
 
-# Масив з частотами літер вхідного тексту
+
+# Масив з частотами оригінальних літер. Сортуєм ці частоти від найбільшої до найменшої.
+print("FO")
+frequency_original = []
+a = 0
+for elements_a in original:
+    b = alphabet[a]
+    a += 1
+    frequency_original.append(original[b])
+
+print(frequency_original)
+frequency_original.sort(reverse=True)
+print(frequency_original)
+print(len(frequency_original))
+
+
+# Масив з частотами літер вхідного тексту. Сортуєм ці частоти від найбільшої до найменшої.
+print("FN")
 frequency_new = []
 a = 0
-for elements_a in new:
+for elements_b in new:
     b = alphabet[a]
     a += 1
     frequency_new.append(new[b])
 
 print(frequency_new)
+frequency_new.sort(reverse=True)
+print(frequency_new)
+print(len(frequency_new))
