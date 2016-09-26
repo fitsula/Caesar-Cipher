@@ -1,7 +1,7 @@
 # ЗАДАЧІ:
-# 1. Взяти декілька наступних по величині значень. Переконатись, що відстань однакова.
+# 1. Змусити код працювати
 # 2. Переписати enc.py з двома параметрами - enc і dec
-# x. Написати шифрацію з ключем і з генерацією рандомного
+# 3. Написати шифрацію з ключем і з генерацією рандомного
 
 
 parameters = {
@@ -207,19 +207,36 @@ def frequencyKey(accuracy):
 
 
             keys.append(key)
-            print('Key ' + str(i) + ' = ' + str(key))
-
-            if i > 0:
-                if i == i - 1:
-                    result = 'All fine'
-                else:
-                    result = 'All bad'
-
-
+            #print('Key ' + str(i) + ' = ' + str(key))
             i += 1
-        print(result)
-        print(keys)
+
+        return keys
+    keys = keySearch()
+    return keys
 
     keySearch()
 
 frequencyKey(parameters['accuracy'])
+
+def finalKey():
+    k = 0
+    keys = frequencyKey(parameters['accuracy'])
+
+    result = 'good'
+    for keyCurrent in keys:
+        print(keyCurrent)
+        if k > 0:
+            if keys[k] == keys[k - 1]:
+                final = keys[k]
+            else:
+                print('bad')
+                result = 'bad'
+        k += 1
+
+    if result == 'bad':
+        final = 'bad'
+
+    return final  # add to global
+
+print('Final Key: ')
+print(finalKey())
