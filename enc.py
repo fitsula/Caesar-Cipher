@@ -14,7 +14,7 @@ length = len(alphabet)
 print('Довжина абетки: ' + str(length))
 
 
-def caesar():
+def encryption():
     new_text = ""
     for character in text:
         n = 0  # який номер елементу в alphabet
@@ -39,4 +39,4 @@ def caesar():
             new_text += character
     return new_text
 
-print(caesar())
+print(encryption())
