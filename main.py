@@ -141,47 +141,113 @@ if parameters['action'] == 'enc':
 
 elif parameters['action'] == 'dec':
 
-    def key_search():
+    if parameters['key'] == 'gen':
+        def key_search():
 
-        # Рахуємо к-сть літер разом і кожної окремо
-        def letters_calculation():
-            for element in alphabet:
-                for character in text:
-                    if character == element:
-                        new[element] += 1
-            for element in alphabet_capital:
-                for character in text:
-                    if character == element:
-                        new[element.lower()] += 1
-        letters_calculation()
+            # Рахуємо к-сть літер
+            def letters_calculation():
+                for element in alphabet:
+                    for character in text:
+                        if character == element:
+                            new[element] += 1
+                for element in alphabet_capital:
+                    for character in text:
+                        if character == element:
+                            new[element.lower()] += 1
 
-        # Розраховуємо і додаємо частоти для кожної літери в словник new
-        def frequency_calculation():
-            for element in new:
-                new[element] /= len(text)  # frequency calculation algorithm
-        frequency_calculation()
+            letters_calculation()
 
-        # Масив з частотами оригінальних літер. Сортуєм ці частоти від найбільшої до найменшої.
-        def frequency_original_sort():
-            frequency = []
-            for element in original:
-                frequency.append(original[element])
-            frequency.sort(reverse=True)
-            return frequency
-        frequency_original_sort()
+            # Розраховуємо і додаємо частоти для кожної літери в словник new
+            def frequency_calculation():
+                for element in new:
+                    new[element] /= len(text)  # frequency calculation algorithm
 
-        # Масив з частотами літер вхідного тексту. Сортуєм ці частоти від найбільшої до найменшої.
-        def frequency_new_sort():
-            frequency = []
-            for element in new:
-                frequency.append(new[element])
-            frequency.sort(reverse=True)
-            return frequency
+            frequency_calculation()
 
-        frequency_original_sort()
-        frequency_new_sort()
+            # Масив з частотами оригінальних літер. Сортуєм ці частоти від найбільшої до найменшої.
+            def frequency_original_sort():
+                frequency = []
+                for element in original:
+                    frequency.append(original[element])
+                frequency.sort(reverse=True)
+                return frequency
 
-    key_search()
+            frequency_original_sort()
+
+            # Масив з частотами літер вхідного тексту. Сортуєм ці частоти від найбільшої до найменшої.
+            def frequency_new_sort():
+                frequency = []
+                for element in new:
+                    frequency.append(new[element])
+                frequency.sort(reverse=True)
+                return frequency
+
+            frequency_original_sort()
+            frequency_new_sort()
+
+            # Вибираємо потрібну к-сть найбільших значень
+            def popular_numbers(accuracy):
+                frequency_original = frequency_original_sort()
+                frequency_original = frequency_original[0:accuracy]
+                frequency_new = frequency_new_sort()
+                frequency_new = frequency_new[0:accuracy]
+
+                def numbers_array(array, freq_array):
+                    numbers = []
+                    for frequency in freq_array:
+                        i = 0
+                        for element in alphabet:
+                            if array[element] == frequency:
+                                numbers.append(i)
+                            i += 1
+
+                    return numbers
+
+                print('Popular Original Numbers = ' + str(numbers_array(original, frequency_original)))
+                print('Popular New Numbers = ' + str(numbers_array(new, frequency_new)))
+
+                # Обчислюємо i створюємо масив з ключами
+                def key_search_array():
+                    numbers_original = numbers_array(original, frequency_original)
+                    numbers_new = numbers_array(new, frequency_new)
+                    i = 0
+                    keys = []
+                    for element in numbers_array(new, frequency_new):
+                        key = (int(numbers_new[i]) - int(numbers_original[i])) % int(len(alphabet))
+                        keys.append(key)
+                        i += 1
+
+                    return keys
+
+                keys = key_search_array()
+                return keys
+
+            def final_key():
+                k = 0
+                keys = popular_numbers(parameters['accuracy'])
+
+                result = 'good'
+                final = 'bad'
+                for current_key in keys:
+                    if k > 0:
+                        if keys[k] == keys[k - 1]:
+                            final = keys[k]
+                        else:
+                            result = 'bad'
+                    k += 1
+
+                if result == 'bad':
+                    final = 'bad'
+
+                return final  # add to global
+
+            key = final_key()
+            return key
+
+        print(key_search())
+    else:
+        def decode():
+            print('you have key, but now you must decode your text using this key')
 
 else:
     print('Restart application and choose "enc" for encoding or "dec" for decoding')
