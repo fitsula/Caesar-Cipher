@@ -239,7 +239,7 @@ elif parameters['action'] == 'dec':
                 if result == 'bad':
                     final = 'bad'
 
-                return final  # add to global
+                return final
 
             key = final_key()
             return key
